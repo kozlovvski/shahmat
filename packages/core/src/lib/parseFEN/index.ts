@@ -1,4 +1,4 @@
-import {ParserError} from "errors/ParserError"
+import {ParserError} from "../../errors/ParserError"
 
 /**
  * function that parses provided FEN string and returns configuration object

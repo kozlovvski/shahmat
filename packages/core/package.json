@@ -3,7 +3,6 @@
   "version": "0.1.0",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
-  "type": "module",
   "author": "kozlovvski",
   "license": "MIT",
   "files": [
@@ -11,9 +10,10 @@
   ],
   "scripts": {
     "build": "tsup src/index.ts",
-    "start": "npm run build -- --watch"
+    "start": "npm run build -- --watch",
+    "test": "jest"
   },
-  "dependencies": {
+  "peerDependencies": {
     "@shahmat/validator": "*"
   }
 }

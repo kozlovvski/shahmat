@@ -1,3 +1,5 @@
+import type shahmatValidator from "@shahmat/validator"
+
 type ShahmatOptions<Validate extends boolean> = {
   fen: string
   validate?: Validate
@@ -6,29 +8,27 @@ type ShahmatOptions<Validate extends boolean> = {
 type ShahmatGame<Validate extends boolean> = {
   position: {},
 } & (Validate extends true ? {
-  validatePosition: () => Promise<boolean>
+  validatePosition: () => Promise<string>
 } : {})
 
 export function createGame<Validate extends boolean = false>(options: ShahmatOptions<Validate>): ShahmatGame<Validate> {
   const position = {};
-  
-  const __validatePosition = async () => {
-    const {validatePosition} = await import('@shahmat/validator')
+  let validator: typeof shahmatValidator;
 
-    return validatePosition()
+  const setupPlugins = async () => {
+    if(options.validate) {
+      validator = (await import('@shahmat/validator')).default
+    }
   }
 
-  const returnObject: ShahmatGame<Validate> = {
+  setupPlugins();
+  
+  const validatePosition = async () => {
+    return validator()
+  }
+
+  return {
     position,
-    validatePosition: options.validate ? __validatePosition : undefined
+    validatePosition
   }
-  
-  return returnObject
 }
-
-const game = createGame({
-  fen: '',
-  validate: true
-});
-
-game.validatePosition
