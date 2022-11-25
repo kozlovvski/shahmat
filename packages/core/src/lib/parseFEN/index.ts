@@ -1,15 +1,19 @@
+import {ParserError} from "errors/ParserError"
+
 /**
  * function that parses provided FEN string and returns configuration object
  */
  export function parseFEN(fenString: string): boolean {
-  if (typeof fenString !== 'string') {
-    throw Error('Provided argument is not a string');
+  const argumentType = typeof fenString
+  if (argumentType !== 'string') {
+    throw new ParserError('value type', argumentType)
   }
 
   const parts = fenString.split(' ');
 
-  if (parts.length !== 6) {
-    throw Error('FEN string should contain 6 parts separated by spaces');
+  const partsNumber = parts.length
+  if (partsNumber !== 6) {
+    throw new ParserError('parts number', partsNumber);
   }
 
   return true;

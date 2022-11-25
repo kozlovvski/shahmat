@@ -1,0 +1,30 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "rootDir": ".",
+    "sourceMap": true,
+    "declaration": true,
+    "declarationMap": true,
+    "moduleResolution": "node",
+    "emitDecoratorMetadata": true,
+    "isolatedModules": true,
+    "preserveWatchOutput": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "experimentalDecorators": true,
+    "importHelpers": true,
+    "target": "ESNext",
+    "module": "ESNext",
+    "lib": ["dom"],
+    "skipLibCheck": true,
+    "skipDefaultLibCheck": true,
+    "baseUrl": ".",
+    "paths": {
+      "@shahmat/core": ["packages/core/src/index.ts"],
+      "@shahmat/validator": ["packages/validator/src/index.ts"]
+    }
+  },
+  "exclude": ["node_modules", "tmp", "dist"],
+  "files": [],
+  "include": []
+}
