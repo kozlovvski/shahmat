@@ -1,2 +1,2 @@
-export * from './lib/parseFEN'
-export * from './lib/ShahmatGame'
+export * from "./lib/parseFEN";
+export * from "./lib/ShahmatGame";

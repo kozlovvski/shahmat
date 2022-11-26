@@ -1,5 +1,5 @@
 function validatePosition() {
-  return "test output"
+  return "test output";
 }
 
-export default validatePosition
+export default validatePosition;
