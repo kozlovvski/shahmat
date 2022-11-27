@@ -13,7 +13,11 @@
     "start": "npm run build -- --watch",
     "test": "jest"
   },
-  "peerDependencies": {
+  "dependencies": {
+    "@shahmat/fen": "*",
+    "@shahmat/utils": "*"
+  },
+  "optionalDependencies": {
     "@shahmat/validator": "*"
   }
 }

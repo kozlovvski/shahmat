@@ -6,8 +6,5 @@ export default defineConfig((options) => ({
   clean: true,
   minify: !options.watch,
   format: ["cjs", "esm"],
-  dts: {
-    resolve: true,
-  },
-  external: ["@shahmat/validator"],
+  dts: true,
 }));

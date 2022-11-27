@@ -1,11 +1,10 @@
 {
-  "name": "@shahmat/validator",
+  "name": "@shahmat/utils",
   "version": "0.1.0",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
   "author": "kozlovvski",
-  "type": "module",
   "license": "MIT",
   "files": [
     "dist"
@@ -13,8 +12,5 @@
   "scripts": {
     "build": "tsup src/index.ts",
     "start": "npm run build -- --watch"
-  },
-  "dependencies": {
-    "@shahmat/utils": "*"
   }
 }

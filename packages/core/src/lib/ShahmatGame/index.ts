@@ -1,37 +1,27 @@
-import type shahmatValidator from "@shahmat/validator";
+import {
+  ShahmatBoardState,
+  ShahmatGameOptions,
+  ShahmatValidator,
+  STARTING_FEN,
+} from "@shahmat/utils";
+import { decodeFEN } from "@shahmat/fen";
 
-type ShahmatOptions<Validate extends boolean> = {
-  fen: string;
-  validate?: Validate;
-};
+export class ShahmatGame {
+  boardState: ShahmatBoardState;
+  static get #validator(): Promise<ShahmatValidator> {
+    return import("@shahmat/validator").then((mod) => mod.default);
+  }
 
-type ShahmatGame<Validate extends boolean> = {
-  position: Record<string, unknown>;
-} & (Validate extends true
-  ? {
-      validatePosition: () => Promise<string>;
+  constructor({ fen, defaults }: ShahmatGameOptions) {
+    if (defaults?.validate) {
+      // prefetch validator lib
+      ShahmatGame.#validator;
     }
-  : unknown);
 
-export function createGame<Validate extends boolean = false>(
-  options: ShahmatOptions<Validate>
-): ShahmatGame<Validate> {
-  const position = {};
-  let validator: typeof shahmatValidator;
-
-  const setupPlugins = async () => {
-    if (options.validate) {
-      validator = (await import("@shahmat/validator")).default;
+    if (fen) {
+      this.boardState = decodeFEN(fen);
+    } else {
+      this.boardState = decodeFEN(STARTING_FEN);
     }
-  };
-  setupPlugins();
-
-  const validatePosition = async () => {
-    return validator();
-  };
-
-  return {
-    position,
-    validatePosition,
-  };
+  }
 }
