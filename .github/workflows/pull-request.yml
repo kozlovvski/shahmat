@@ -1,0 +1,27 @@
+name: Pull request runner
+
+on:
+  pull_request:
+
+jobs:
+  build-and-test:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+        node: [12, 14, 16, 18]
+    runs-on: ${{ matrix.os }}
+    name: Build and test on Node ${{ matrix.node }}
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node }}
+      - run: yarn
+      - run: yarn lint
+      - run: yarn test --coverage
+      - run: yarn build
+      - name: Upload coverage reports to Codecov
+        uses: codecov/codecov-action@v3
+        if: matrix.os == 'ubuntu-latest' && matrix.node-version == 12
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}

@@ -10,6 +10,7 @@
   ],
   "scripts": {
     "build": "tsup src/index.ts",
+    "lint": "eslint ./src",
     "dev": "npm run build -- --watch"
   },
   "dependencies": {
