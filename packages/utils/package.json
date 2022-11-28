@@ -11,6 +11,6 @@
   ],
   "scripts": {
     "build": "tsup src/index.ts",
-    "start": "npm run build -- --watch"
+    "dev": "npm run build -- --watch"
   }
 }

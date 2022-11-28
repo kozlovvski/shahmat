@@ -10,8 +10,7 @@
   ],
   "scripts": {
     "build": "tsup src/index.ts",
-    "start": "npm run build -- --watch",
-    "test": "jest"
+    "dev": "npm run build -- --watch"
   },
   "dependencies": {
     "@shahmat/fen": "*",

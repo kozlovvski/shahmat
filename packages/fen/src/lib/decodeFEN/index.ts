@@ -1,4 +1,4 @@
-import { ShahmatBoardState } from "@shahmat/utils";
+import type { ShahmatBoardState } from "@shahmat/utils";
 import { createFenError } from "../../errors/createFenError";
 import {
   parseCastlingRights,

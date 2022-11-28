@@ -5,14 +5,13 @@
   "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
   "author": "kozlovvski",
-  "type": "module",
   "license": "MIT",
   "files": [
     "dist"
   ],
   "scripts": {
     "build": "tsup src/index.ts",
-    "start": "npm run build -- --watch"
+    "dev": "npm run build -- --watch"
   },
   "dependencies": {
     "@shahmat/utils": "*"

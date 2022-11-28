@@ -1,9 +1,0 @@
-{
-  "name": "@shahmat/types",
-  "private": true,
-  "version": "0.1.0",
-  "author": "kozlovvski",
-  "type": "module",
-  "types": "dist/index.d.ts",
-  "license": "MIT"
-}

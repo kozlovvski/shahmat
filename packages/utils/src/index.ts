@@ -15,6 +15,7 @@ export * from "./lib/isChesspiece";
 export * from "./lib/isChessboardColumn";
 export * from "./lib/isChessboardRow";
 export * from "./lib/isChessboardSquare";
+export * from "./lib/isEnPassantTarget";
 
 // types
 
@@ -29,3 +30,5 @@ export * from "./types/ShahmatPiecesDict";
 export * from "./types/ShahmatBoardState";
 export * from "./types/ShahmatGameOptions";
 export * from "./types/ShahmatValidator";
+export * from "./types/ShahmatGameInterface";
+export * from "./types/EnPassantTargetSquare";

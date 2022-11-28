@@ -1,5 +1,5 @@
 export type ShahmatGameOptions = {
-  fen: string;
+  fen?: string;
   defaults?: Partial<{
     validate: boolean;
   }>;

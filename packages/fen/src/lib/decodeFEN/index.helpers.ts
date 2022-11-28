@@ -10,10 +10,17 @@ import {
 } from "@shahmat/utils";
 import { createFenError } from "../../errors/createFenError";
 
+const WHITE = "white" as const;
+const BLACK = "black" as const;
+const FULLMOVE = "fullmove" as const;
+const HALFMOVE = "halfmove" as const;
+const QUEENSIDE = "queenside" as const;
+const KINGSIDE = "kingside" as const;
+
 export const parsePieces = (rowsPart: string) => {
   const rows = rowsPart.split("/");
   const rowsNumber = rows.length;
-  if (rowsNumber !== 6) {
+  if (rowsNumber !== 8) {
     throw createFenError("rows number", rowsNumber);
   }
 
@@ -21,27 +28,29 @@ export const parsePieces = (rowsPart: string) => {
     const rowNumber = (8 - rowIndex) as ChessboardRow;
     let columnNumber = 0;
 
-    for (let i = 1; i < row.length; ) {
-      const pieceOrRowsToSkip = row[i];
-      const rowsToSkip = parseInt(pieceOrRowsToSkip);
+    const checkColumnNumber = () => {
+      if (columnNumber > 8) {
+        throw createFenError("total number of columns", row);
+      }
+    };
 
-      if (isNaN(rowsToSkip)) {
-        if (isChesspiece(pieceOrRowsToSkip)) {
+    for (let i = 0; i < row.length; i++) {
+      const pieceOrColumnsToSkip = row[i];
+      const columnsToSkip = parseInt(pieceOrColumnsToSkip);
+
+      if (isNaN(columnsToSkip)) {
+        if (isChesspiece(pieceOrColumnsToSkip)) {
           const square: ChessboardSquare = `${COLUMNS[columnNumber]}${rowNumber}`;
-          currentPieces[square] = pieceOrRowsToSkip;
+          currentPieces[square] = pieceOrColumnsToSkip;
           columnNumber++;
+          checkColumnNumber();
           continue;
         } else {
-          throw createFenError("piece", pieceOrRowsToSkip);
+          throw createFenError("piece", pieceOrColumnsToSkip);
         }
       }
-
-      if (rowsToSkip > 0 && rowsToSkip < 8) {
-        columnNumber += rowsToSkip;
-        continue;
-      } else {
-        throw createFenError("number of rows to skip", rowsToSkip);
-      }
+      columnNumber += columnsToSkip;
+      checkColumnNumber();
     }
 
     return currentPieces;
@@ -54,7 +63,7 @@ const isFENColor = (color: string): color is FENColor =>
   ["w", "b"].includes(color);
 
 export const parseFENColor = (activeColorPart: string): ChessPlayerColor => {
-  const colorsDict = { w: "white", b: "black" } as const;
+  const colorsDict = { w: WHITE, b: BLACK } as const;
   if (isFENColor(activeColorPart)) {
     return colorsDict[activeColorPart];
   }
@@ -66,17 +75,22 @@ export const parseCastlingRights = (
   castlingRightsPart: string
 ): ShahmatCastlingRights => {
   const fenRightsError = createFenError("castling rights", castlingRightsPart);
+
   const defaultRights = {
-    queenside: false,
-    kingside: false,
+    [QUEENSIDE]: false,
+    [KINGSIDE]: false,
   };
   const rights: ShahmatCastlingRights = {
-    white: defaultRights,
-    black: defaultRights,
+    [WHITE]: defaultRights,
+    [BLACK]: defaultRights,
   };
 
+  if (castlingRightsPart === "-") {
+    return rights;
+  }
+
   const fenRightsLength = castlingRightsPart.length;
-  if (castlingRightsPart.length > 4) {
+  if (!/^K?Q?k?q?$/.test(castlingRightsPart)) {
     throw fenRightsError;
   }
 
@@ -85,19 +99,17 @@ export const parseCastlingRights = (
 
     switch (currentRight) {
       case "K":
-        rights.white.kingside = true;
+        rights[WHITE][KINGSIDE] = true;
         break;
       case "Q":
-        rights.white.queenside = true;
+        rights[WHITE][QUEENSIDE] = true;
         break;
       case "k":
-        rights.black.kingside = true;
+        rights[BLACK][KINGSIDE] = true;
         break;
       case "q":
-        rights.black.kingside = true;
+        rights[BLACK][QUEENSIDE] = true;
         break;
-      default:
-        throw fenRightsError;
     }
   }
 
@@ -125,14 +137,13 @@ export const parseHalfmoveClock = (halfmovePart: string): number => {
     return clock;
   }
 
-  throw createFenError("halfmove", halfmovePart);
+  throw createFenError(HALFMOVE, halfmovePart);
 };
 
 export const parseMoveNumber = (
   moveNumberPart: string,
   halfmove: number
 ): number => {
-  const FULLMOVE = "fullmove";
   const clock = Number(moveNumberPart);
 
   if (clock <= halfmove) {
