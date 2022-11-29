@@ -9,6 +9,14 @@ module.exports = {
     browser: true,
     node: true,
   },
+  rules: {
+    "prettier/prettier": [
+      "error",
+      {
+        endOfLine: "auto",
+      },
+    ],
+  },
   overrides: [
     {
       files: ["**/*.cjs"],
