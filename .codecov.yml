@@ -1,0 +1,16 @@
+flags:
+  core:
+    paths:
+      - "packages/core"
+  fen:
+    paths:
+      - "packages/fen"
+  utils:
+    paths:
+      - "packages/utils"
+  validator:
+    paths:
+      - "packages/validator"
+
+fixes:
+  - "packages/::"

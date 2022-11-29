@@ -1,5 +1,5 @@
 import { ShahmatBoardState } from "@shahmat/utils";
-import { decodeFEN } from "@shahmat/fen";
+import { decodeFEN } from ".";
 
 describe("decodeFEN", () => {
   it("throws when argument is not a string", () => {

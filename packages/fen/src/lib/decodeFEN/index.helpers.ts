@@ -10,12 +10,12 @@ import {
 } from "@shahmat/utils";
 import { createFenError } from "../../errors/createFenError";
 
-const WHITE = "white" as const;
-const BLACK = "black" as const;
-const FULLMOVE = "fullmove" as const;
-const HALFMOVE = "halfmove" as const;
-const QUEENSIDE = "queenside" as const;
-const KINGSIDE = "kingside" as const;
+const WHITE = "white";
+const BLACK = "black";
+const FULLMOVE = "fullmove";
+const HALFMOVE = "halfmove";
+const QUEENSIDE = "queenside";
+const KINGSIDE = "kingside";
 
 export const parsePieces = (rowsPart: string) => {
   const rows = rowsPart.split("/");
