@@ -11,3 +11,6 @@ flags:
   validator:
     paths:
       - "packages/validator"
+
+fixes:
+  - "packages/::"
