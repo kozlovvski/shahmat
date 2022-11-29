@@ -1,0 +1,17 @@
+{
+  "name": "@shahmat/utils",
+  "version": "0.1.0",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "author": "kozlovvski",
+  "license": "MIT",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsup src/index.ts",
+    "lint": "eslint ./src",
+    "dev": "npm run build -- --watch"
+  }
+}

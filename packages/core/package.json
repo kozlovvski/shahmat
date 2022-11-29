@@ -1,0 +1,23 @@
+{
+  "name": "@shahmat/core",
+  "version": "0.1.0",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "author": "kozlovvski",
+  "license": "MIT",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsup src/index.ts",
+    "lint": "eslint ./src",
+    "dev": "npm run build -- --watch"
+  },
+  "dependencies": {
+    "@shahmat/fen": "*",
+    "@shahmat/utils": "*"
+  },
+  "optionalDependencies": {
+    "@shahmat/validator": "*"
+  }
+}
