@@ -20,7 +20,8 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node }}
-      - run: yarn
+          cache: yarn
+      - run: yarn install
       - run: yarn lint
       - run: yarn build
       - run: yarn test --coverage
