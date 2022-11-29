@@ -2,6 +2,9 @@ name: Build and test new code
 
 on:
   pull_request:
+  push:
+    branches:
+      - main
 
 concurrency:
   group: ${{ github.ref }}
