@@ -8,14 +8,15 @@ import {
   ShahmatPiecesDict,
   isChessboardSquare,
 } from "@shahmat/utils";
+import {
+  BLACK,
+  FULLMOVE,
+  HALFMOVE,
+  KINGSIDE,
+  QUEENSIDE,
+  WHITE,
+} from "~locales";
 import { createFenError } from "../../errors/createFenError";
-
-const WHITE = "white";
-const BLACK = "black";
-const FULLMOVE = "fullmove";
-const HALFMOVE = "halfmove";
-const QUEENSIDE = "queenside";
-const KINGSIDE = "kingside";
 
 export const parsePieces = (rowsPart: string) => {
   const rows = rowsPart.split("/");
