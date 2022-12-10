@@ -50,6 +50,7 @@ export class ShahmatGame implements ShahmatGameInterface {
     return this.boardState.halfmoveClock;
   }
 
+  /** @inheritdoc */
   get moves() {
     return [];
   }
